@@ -1,28 +1,26 @@
 import org.w3c.dom.ls.LSOutput;
-
-public class Library {
+class Library {
 
     public static void main(String[] args) {
 
-    final String appName = "Biblioteka v0.2";
+    final String appName = "Biblioteka v0.3";
 
-    Book book1 = new Book ();
-    book1.title = "W pustyni i w puszczy";
-    book1.writer = "Henryk Sienskiewicz";
-    book1.releaseYear = 2011;
-    book1.pagesAmount = 234;
-    book1.publishingHouse = "GREG";
-    book1.ISBN = "09878798767896";
+    Book book1 = new Book ("W pustyni i w puszczy","Henryk Sienskiewicz",2011,
+                          234,"GREG","09878798767896" );
+    Book book2 = new Book ("Rok Dobrych myśli","Beata Pawlikowska",2019,
+                            365,"EDIPRESSE","88555543333455" );
+    Book book3 = new Book ("Mandale Kolorwanie  i Bazgranie","Odeta Redo",2015,
+                            79,"OLESIEJUK","97883274397722" );
 
 
-        System.out.println (appName);
-        System.out.println ("W Bibliotece aktualnie znajdują się książki: ");
-        System.out.println (book1.title);
-        System.out.println (book1.writer);
-        System.out.println (book1.releaseYear);
-        System.out.println (book1.pagesAmount);
-        System.out.println (book1.publishingHouse);
-        System.out.println (book1.ISBN);
+    System.out.println (appName);
+    System.out.println ("W Bibliotece aktualnie znajdują się książki: ");
+    book1.InfoBookPrinter();
+    book2.InfoBookPrinter();
+    book3.InfoBookPrinter();
+
+
+
 
     }
 }
