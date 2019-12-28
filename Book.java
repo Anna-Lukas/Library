@@ -1,5 +1,8 @@
 class Book {
 
+
+
+
     String title;
     String writer ;
     int releaseYear ;
@@ -7,16 +10,20 @@ class Book {
     String publishingHouse;
     String ISBN ;
 
-    Book (String booktitle, String bookwriter, int bookreleaseYear, int bookpagesAmount, String bookpublishingHouse,
-          String bookISBN){
-        title = booktitle;
-        writer = bookwriter;
-        releaseYear = bookreleaseYear;
-        pagesAmount = bookpagesAmount;
-        publishingHouse = bookpublishingHouse;
-        ISBN = bookISBN;
-
+    public Book(String title, String writer, int releaseYear, int pagesAmount, String publishingHouse, String ISBN) {
+        this(title, writer, releaseYear, pagesAmount, publishingHouse);
+        this.ISBN = ISBN;
     }
+
+    public Book(String title, String writer, int releaseYear, int pagesAmount, String publishingHouse) {
+        this.title = title;
+        this.writer = writer;
+        this.releaseYear = releaseYear;
+        this.pagesAmount = pagesAmount;
+        this.publishingHouse = publishingHouse;
+    }
+
+
     void InfoBookPrinter(){
         System.out.println("Tytuł: "+ title + ", "+ "autor: "+ writer+ ", rok wydania: "+ releaseYear+ ", ilość stron: "
                             + pagesAmount+ ", wydawnictwo: "+ publishingHouse+ ", nr ISBN"+ ISBN+ ".");
