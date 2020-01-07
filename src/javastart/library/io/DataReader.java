@@ -5,9 +5,7 @@ import src.javastart.library.model.Book;
 import java.util.Scanner;
 
 public class DataReader {
-    public void close(){
-        scanner.close();
-    }
+
     Scanner scanner = new Scanner(System.in);
     public Book readAndCreateBook(){
         System.out.println("Podaj Tytuł: ");
@@ -26,5 +24,17 @@ public class DataReader {
         String ISBN = scanner.nextLine();
 
         return new Book(title,writer,yearRelease,pagesAmount,publishingHouse,ISBN);
+    }
+
+    public int getInt() {
+        int number = scanner.nextInt ();
+        scanner.nextLine ();
+        return number;
+    }
+
+
+    public void close(){
+        scanner.close();
+
     }
 }
