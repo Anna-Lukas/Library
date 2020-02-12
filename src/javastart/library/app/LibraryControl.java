@@ -3,12 +3,15 @@ package src.javastart.library.app;
 import src.javastart.library.io.DataReader;
 import src.javastart.library.model.Book;
 import src.javastart.library.model.Library;
+import src.javastart.library.model.Magazine;
 
 public class LibraryControl {
 
-    private final int exit = 0;
-    private final int addBook = 1;
-    private final int printBooks = 2;
+    private static final int EXIT = 0;
+    private static final int ADD_BOOK = 1;
+    private static final int ADD_MAGAZINE = 2;
+    private static final int PRINT_BOOK = 3;
+    private static final int PRINT_MAGAZINE = 4;
 
     private DataReader dataReader = new DataReader ();
 
@@ -21,44 +24,59 @@ public class LibraryControl {
             printOptions ();
             options = dataReader.getInt ();
             switch (options) {
-                case addBook:
+                case ADD_BOOK:
                     addBook ();
                     break;
-                case printBooks:
+                case ADD_MAGAZINE:
+                    addMagazine ();
+                    break;
+                case PRINT_BOOK:
                     printBooks ();
                     break;
-                case exit:
+                case PRINT_MAGAZINE:
+                    printMagazines ();
+                    break;
+                case EXIT:
                     exit ();
                     break;
                 default:
                     System.out.println ("Bledna opcja");
             }
 
-            }while (options!= exit);
+            }while (options!= EXIT);
         }
 
-
-
-
-
-    private void exit() {
-        System.out.println ("Koniec programu");
-        dataReader.close ();
+    private void printOptions() {
+        System.out.println ("Wybierz opcje: ");
+        System.out.println (EXIT + " - wyjscie z programu");
+        System.out.println (ADD_BOOK + " dodanie nowej książki");
+        System.out.println (ADD_MAGAZINE + " dodanie nowego magazynu");
+        System.out.println (PRINT_BOOK+" wyświetl dostępne książki");
+        System.out.println (PRINT_MAGAZINE+" wyświetl dostępne magazyny");
     }
 
     private void printBooks() {
         library.printBooks ();
     }
 
-    private void printOptions() {
-        System.out.println ("Wybierz opcje: ");
-        System.out.println (exit + " - wyjscie z programu");
-        System.out.println (addBook + " dodanie nowej książki");
-        System.out.println (printBooks+" wyświetl dostępne książki");
-    }
+
     private void addBook() {
         Book book =  dataReader.readAndCreateBook ();
         library.addBook (book);
 
+    }
+    private void printMagazines(){
+        library.printMagazine ();
+    }
+
+    private void addMagazine() {
+        Magazine magazine = dataReader.readAndCreateMagazine ();
+        library.addMagazine (magazine);
+    }
+
+
+    private void exit() {
+        System.out.println ("Koniec programu");
+        dataReader.close ();
     }
 }

@@ -1,34 +1,23 @@
 package src.javastart.library.model;
 
-public class Book {
+public class Book extends Publication {
 
-    private String title;
+
     private String writer;
-    private int releaseYear;
     private int pagesAmount;
-    private String publishingHouse;
     private String ISBN;
 
+
     public Book(String title, String writer, int releaseYear, int pagesAmount, String publishingHouse, String ISBN) {
-        this(title, writer, releaseYear, pagesAmount, publishingHouse);
-        this.ISBN = ISBN;
-    }
-
-    public Book(String title, String writer, int releaseYear, int pagesAmount, String publishingHouse) {
-        this.title = title;
-        this.writer = writer;
-        this.releaseYear = releaseYear;
+        this.setTitle (title);
+        this.setPublishingHouse (publishingHouse);
+        this.setReleaseYear (releaseYear);
         this.pagesAmount = pagesAmount;
-        this.publishingHouse = publishingHouse;
+        this.writer = writer;
+        this.ISBN = ISBN;
+
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getWriter() {
         return writer;
@@ -38,13 +27,6 @@ public class Book {
         this.writer = writer;
     }
 
-    public int getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
-    }
 
     public int getPagesAmount() {
         return pagesAmount;
@@ -54,13 +36,6 @@ public class Book {
         this.pagesAmount = pagesAmount;
     }
 
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse;
-    }
 
     public String getISBN() {
         return ISBN;
@@ -71,12 +46,12 @@ public class Book {
     }
 
     public void InfoBookPrinter() {
-        String info = "Tytuł: " + title + ", " + "autor: " + writer + ", rok wydania: " + releaseYear + ", ilość stron: "
-                + pagesAmount + ", wydawnictwo: " + publishingHouse;
+        String info = "Tytuł: " + getTitle () + ", " + "autor: " + writer + ", rok wydania: " + getReleaseYear () + ", ilość stron: "
+                + pagesAmount + ", wydawnictwo: " + getPublishingHouse ();
         if (ISBN != null) {
             info = info + ", nr ISBN: " + ISBN + ".";
         }
-        System.out.println(info);
+        System.out.println (info);
 
     }
 
