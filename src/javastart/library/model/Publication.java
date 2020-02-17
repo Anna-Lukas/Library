@@ -2,6 +2,14 @@ package src.javastart.library.model;
 
 public class Publication {
     private String title;
+    private int releaseYear;
+    private String publishingHouse;
+
+    public Publication(String title, int releaseYear, String publishingHouse) {
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.publishingHouse = publishingHouse;
+    }
 
     public String getTitle() {
         return title;
@@ -27,7 +35,5 @@ public class Publication {
         this.publishingHouse = publishingHouse;
     }
 
-    private int releaseYear;
-    private String publishingHouse;
 
 }

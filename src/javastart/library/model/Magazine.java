@@ -1,6 +1,7 @@
 package src.javastart.library.model;
 
 public class Magazine extends Publication {
+
     private int month;
     private int day;
     private String language;
@@ -30,9 +31,7 @@ public class Magazine extends Publication {
     }
 
     public Magazine(String title, String publishingHouse, String language, int releaseYear,int month, int day) {
-        setTitle (title);
-        setReleaseYear(releaseYear);
-        setPublishingHouse (publishingHouse);
+        super(title,releaseYear,publishingHouse);
         this.month = month;
         this.day = day;
         this.language = language;
