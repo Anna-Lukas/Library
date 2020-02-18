@@ -35,5 +35,8 @@ public class Publication {
         this.publishingHouse = publishingHouse;
     }
 
+    public void InfoBookPrinter(){
+    }
+
 
 }

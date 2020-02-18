@@ -2,44 +2,52 @@ package src.javastart.library.model;
 
 public class Library {
 
-    private static final int MAX_BOOKS = 1000;
-    private static final int MAX_MAGAZINES = 1000;
-    private Book[] books = new Book[MAX_BOOKS];
-    private Magazine[] magazines = new Magazine[MAX_MAGAZINES];
-    private int booksNumber;
-    private int magazinesNumber;
 
-    public void addBook(Book book){
-        if (booksNumber< MAX_BOOKS){
-            books[booksNumber] = book;
-            booksNumber++;
-        }else {
+    private static final int MAX_PUBLICATION = 2000;
+    private int publicationNumber;
+    private Publication[] publications = new Publication[MAX_PUBLICATION];
+
+    public void addBook(Book book) {
+        if (publicationNumber < MAX_PUBLICATION) {
+            publications[publicationNumber] = book;
+            publicationNumber++;
+        } else {
             System.out.println (" nie ma miejsca na ksiązki");
         }
     }
-    public void printBooks(){
-        if(booksNumber==0){
-            System.out.println ("Brak książków");
-        }
-        for(int i = 0; i<booksNumber; i++){
-            books[i].InfoBookPrinter ();
+
+    public void printBooks() {
+        int countBooks = 0;
+        for (int i = 0; i < publicationNumber; i++) {
+            if (publications[i] instanceof Book){
+                publications[i].InfoBookPrinter ();
+            countBooks++;
         }
     }
+    if (countBooks == 0) {
+        System.out.println ("Brak książków");
+    }
+    }
 
-    public void addMagazine(Magazine magazine){
-        if (magazinesNumber< MAX_MAGAZINES){
-            magazines[magazinesNumber] = magazine;
-            magazinesNumber++;
-        }else {
+    public void addMagazine(Magazine magazine) {
+        if (publicationNumber < MAX_PUBLICATION) {
+            publications[publicationNumber] = magazine;
+            publicationNumber++;
+        } else {
             System.out.println (" nie ma miejsca na magazyn");
         }
     }
-    public void printMagazine(){
-        if(magazinesNumber==0){
-            System.out.println ("Brak magazynów");
-        }
-        for(int i = 0; i<magazinesNumber; i++){
-            magazines[i].printInfo ();
+
+    public void printMagazine() {
+        int countMagazines = 0;
+        for (int i = 0; i < publicationNumber; i++) {
+            if (publications[i] instanceof Magazine) {
+                publications[i].InfoBookPrinter ();
+                countMagazines++;
+            }
+            if (countMagazines == 0) {
+                System.out.println ("Brak magazynów");
+            }
         }
     }
 }

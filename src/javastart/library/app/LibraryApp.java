@@ -1,7 +1,7 @@
 package src.javastart.library.app;
 
 public class LibraryApp {
-    private static final String appName = "BOBLIOTEKA v1.1";
+    private static final String appName = "BOBLIOTEKA v1.2";
 
     public static void main(String[] args) {
         System.out.println (appName);

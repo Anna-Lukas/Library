@@ -36,7 +36,8 @@ public class Magazine extends Publication {
         this.day = day;
         this.language = language;
     }
-    public void printInfo(){
+    @Override
+    public void InfoBookPrinter(){
         String info = getTitle ()+ "; " +getPublishingHouse ()+ "; " +getReleaseYear ()+ "- " +getMonth ()+ "- " +getDay ()+ "; " +getLanguage ();
         System.out.println (info);
     }

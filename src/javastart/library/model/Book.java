@@ -43,6 +43,7 @@ public class Book extends Publication {
         this.ISBN = ISBN;
     }
 
+    @Override
     public void InfoBookPrinter() {
         String info = "Tytuł: " + getTitle () + ", " + "autor: " + writer + ", rok wydania: " + getReleaseYear () + ", ilość stron: "
                 + pagesAmount + ", wydawnictwo: " + getPublishingHouse ();
