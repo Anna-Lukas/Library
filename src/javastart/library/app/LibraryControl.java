@@ -7,33 +7,28 @@ import src.javastart.library.model.Magazine;
 
 public class LibraryControl {
 
-    private static final int EXIT = 0;
-    private static final int ADD_BOOK = 1;
-    private static final int ADD_MAGAZINE = 2;
-    private static final int PRINT_BOOK = 3;
-    private static final int PRINT_MAGAZINE = 4;
+
 
     private DataReader dataReader = new DataReader ();
-
     private Library library = new Library();
 
     public void controlLoop() {
-        int options;
+        Option option;
 
         do {
             printOptions ();
-            options = dataReader.getInt ();
-            switch (options) {
-                case ADD_BOOK:
+            option = Option.createFromInt (dataReader.getInt());
+            switch (option) {
+                case ADD_BOOKS:
                     addBook ();
                     break;
                 case ADD_MAGAZINE:
                     addMagazine ();
                     break;
-                case PRINT_BOOK:
+                case PRINT_BOOKS:
                     printBooks ();
                     break;
-                case PRINT_MAGAZINE:
+                case PRINT_MAGAZINES:
                     printMagazines ();
                     break;
                 case EXIT:
@@ -43,16 +38,15 @@ public class LibraryControl {
                     System.out.println ("Bledna opcja");
             }
 
-            }while (options!= EXIT);
+            }while (option!= option.EXIT);
         }
 
     private void printOptions() {
         System.out.println ("Wybierz opcje: ");
-        System.out.println (EXIT + " - wyjscie z programu");
-        System.out.println (ADD_BOOK + " dodanie nowej książki");
-        System.out.println (ADD_MAGAZINE + " dodanie nowego magazynu");
-        System.out.println (PRINT_BOOK+" wyświetl dostępne książki");
-        System.out.println (PRINT_MAGAZINE+" wyświetl dostępne magazyny");
+        for (Option value : Option.values()) {
+            System.out.println(value);
+            
+        }
     }
 
     private void printBooks() {
