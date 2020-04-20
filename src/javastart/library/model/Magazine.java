@@ -2,6 +2,7 @@ package src.javastart.library.model;
 
 public class Magazine extends Publication {
 
+    public static final String TYPE = "Magazyn";
     private int month;
     private int day;
     private String language;
@@ -30,15 +31,32 @@ public class Magazine extends Publication {
         this.language = language;
     }
 
-    public Magazine(String title, String publishingHouse, String language, int releaseYear,int month, int day) {
-        super(title,releaseYear,publishingHouse);
+    public Magazine(String title,String publishingHouse,int releaseYear,  int month, int day,String language) {
+        super(title,publishingHouse,releaseYear);
         this.month = month;
         this.day = day;
         this.language = language;
     }
     @Override
     public void InfoBookPrinter(){
-        String info = getTitle ()+ "; " +getPublishingHouse ()+ "; " +getReleaseYear ()+ "- " +getMonth ()+ "- " +getDay ()+ "; " +getLanguage ();
+        String info = getTitle ()+ "; " +getReleaseYear ()+ "; " +getPublishingHouse ()+ "; " +getMonth ()+ "- " +getDay ()+ "; " +getLanguage ();
         System.out.println (info);
+    }
+    @Override
+    public String toString() {
+        return super.toString() + ", " + month + ", " + day + ", " + language;
+    }
+
+    @Override
+
+    public String toCsv() {
+        return TYPE + ";"+
+                getTitle()+";"+
+
+                getPublishingHouse()+";"+
+                getReleaseYear()+";"+
+                month+";"+
+                day+";"+
+                language;
     }
 }

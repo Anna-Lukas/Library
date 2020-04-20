@@ -1,14 +1,18 @@
 package src.javastart.library.model;
 
-public class Publication {
+import java.io.Serializable;
+import java.util.Objects;
+
+public abstract class Publication implements Serializable {
+
     private String title;
     private int releaseYear;
     private String publishingHouse;
 
-    public Publication(String title, int releaseYear, String publishingHouse) {
+    public Publication(String title, String publishingHouse, int releaseYear) {
         this.title = title;
-        this.releaseYear = releaseYear;
         this.publishingHouse = publishingHouse;
+        this.releaseYear = releaseYear;
     }
 
     public String getTitle() {
@@ -38,5 +42,26 @@ public class Publication {
     public void InfoBookPrinter(){
     }
 
+    @Override
+    public String toString() {
+        return  title + ", " + publishingHouse+ ", " + releaseYear ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Publication that = (Publication) o;
+        return releaseYear == that.releaseYear &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(publishingHouse, that.publishingHouse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title,  publishingHouse, releaseYear);
+    }
+
+    public abstract String toCsv();
 
 }

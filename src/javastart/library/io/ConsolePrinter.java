@@ -4,12 +4,15 @@ import src.javastart.library.model.Book;
 import src.javastart.library.model.Magazine;
 import src.javastart.library.model.Publication;
 
+import java.util.Arrays;
+
 public class ConsolePrinter {
+
     public void printBooks(Publication[] publications) {
         int countBooks = 0;
         for (Publication publication : publications) {
             if (publication instanceof Book) {
-                System.out.println(publication);
+                printLine(publication.toString());
                 countBooks++;
             }
         }
@@ -23,7 +26,7 @@ public class ConsolePrinter {
         int countMagazines = 0;
         for (Publication publication : publications) {
             if (publication instanceof Magazine) {
-                System.out.println(publications);
+                printLine(publication.toString());
                 countMagazines++;
             }
         }
