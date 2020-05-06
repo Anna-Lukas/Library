@@ -1,30 +1,51 @@
 package src.javastart.library.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Library implements Serializable {
 
+    private static final int INITIAL_CAPACITY = 1;
+    private int publicationNumber = 0;
+    private Publication[] publications = new Publication[INITIAL_CAPACITY];
 
-    private static final int MAX_PUBLICATION = 2000;
-    private int publicationNumber;
-    private Publication[] publications = new Publication[MAX_PUBLICATION];
-
-    public Publication[] getPublications(){
-        Publication [] result = new Publication[publicationNumber];
-        for (int i = 0; i < result.length ; i++) {
+    public Publication[] getPublications() {
+        Publication[] result = new Publication[publicationNumber];
+        for (int i = 0; i < publicationNumber; i++) {
             result[i] = publications[i];
         }
         return result;
     }
 
 
-
-
-    public void addPublication(Publication publication){
-        if(publicationNumber>=MAX_PUBLICATION){
-            throw new ArrayIndexOutOfBoundsException("Max Publication exceeded" + MAX_PUBLICATION);
+    public void addPublication(Publication publication) {
+        if (publicationNumber == publications.length) {
+           publications = Arrays.copyOf(publications, publications.length * 2);
         }
         publications[publicationNumber] = publication;
         publicationNumber++;
     }
-}
+
+
+    public boolean removePublication(Publication pub){
+        final int NOT_FOUND= -1;
+        int found = NOT_FOUND;
+        int i = 0;
+        while (i < publicationNumber && found == NOT_FOUND) {
+            if (pub.equals(publications[i])) {
+                found = i;
+            } else {
+                i++;
+            }
+        }
+
+        if (found != NOT_FOUND){
+            System.arraycopy(publications, found +1, publications, found, publications.length - found - 1);
+            publicationNumber--;
+            publications[publicationNumber] = null;
+            }
+
+            return found!= NOT_FOUND;
+        }
+    }
+

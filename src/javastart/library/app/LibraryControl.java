@@ -56,6 +56,12 @@ public class LibraryControl {
                 case PRINT_MAGAZINES:
                     printMagazines();
                     break;
+                case DELETE_BOOK:
+                    deleteBook();
+                    break;
+                case DELETE_MAGAZINES:
+                    deleteMagazine();
+                    break;
                 case EXIT:
                     exit();
                     break;
@@ -65,6 +71,8 @@ public class LibraryControl {
 
         } while (option != Option.EXIT);
     }
+
+
 
     private Option getOption() {
         boolean optionOk = false;
@@ -102,6 +110,18 @@ public class LibraryControl {
         }
     }
 
+    private void deleteBook() {
+        try {
+            Book book = dataReader.readAndCreateBook();
+            if (library.removePublication(book))
+                printer.printLine("Usunięto książke");
+            else
+                printer.printLine("Nie ma takiej książki");
+        } catch (InputMismatchException e) {
+            printer.printLine("Nieudało się utworzyć książki?");
+        }
+    }
+
     private void printBooks() {
         Publication[] publications = library.getPublications();
         printer.printBooks(publications);
@@ -115,6 +135,19 @@ public class LibraryControl {
             printer.printLine("Nieudało się wprowadzić numeru");
         } catch (ArrayIndexOutOfBoundsException e) {
             printer.printLine("Osiągnięto limit pojemności, nie da się dodac Magazynu");
+        }
+    }
+
+
+    private void deleteMagazine() {
+        try {
+            Magazine magazine = dataReader.readAndCreateMagazine();
+            if (library.removePublication(magazine))
+                printer.printLine("Usunięto mafazyn");
+            else
+                printer.printLine("Nie ma takiego magazynu");
+        } catch (InputMismatchException e) {
+            printer.printLine("Nieudało się utworzyć magazynu?");
         }
     }
 
@@ -140,7 +173,9 @@ public class LibraryControl {
         ADD_BOOKS(1, "Utwórz książkę"),
         ADD_MAGAZINE(2, "Utwórz magazyn"),
         PRINT_BOOKS(3, "wyświetl dostępne ksiązki"),
-        PRINT_MAGAZINES(4, "Wyświetl dostępne magazyny");
+        PRINT_MAGAZINES(4, "Wyświetl dostępne magazyny"),
+        DELETE_BOOK(5, "Usuń książkę"),
+        DELETE_MAGAZINES(6, "Usuń magazyn");
 
 
 
