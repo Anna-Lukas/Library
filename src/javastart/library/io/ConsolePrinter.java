@@ -36,6 +36,6 @@ public class ConsolePrinter {
     }
 
     public void printLine(String text) {
-        System.out.println(text.toUpperCase());
+        System.out.println(text);
     }
 }

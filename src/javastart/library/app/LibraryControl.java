@@ -13,7 +13,10 @@ import src.javastart.library.model.Book;
 import src.javastart.library.model.Library;
 import src.javastart.library.model.Magazine;
 import src.javastart.library.model.Publication;
+import src.javastart.library.model.comparator.AlphabeticalComparator;
+import src.javastart.library.model.comparator.DateComparator;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class LibraryControl {
@@ -29,10 +32,10 @@ public class LibraryControl {
         fileManager = new FileManagerBuilder(printer, dataReader).build();
         try {
             library = fileManager.importData();
-            printer.printLine("Zaimportowano dane z pliku");
+            printer.printLine("Zaimportowano dane z pliku".toUpperCase());
         }catch (DataImportException | InvalidDataException e){
             printer.printLine(e.getMessage());
-            printer.printLine("Zainicjowanno nową bazę.");
+            printer.printLine("Zainicjowanno nową bazę.".toUpperCase());
             library = new Library();
         }
     }
@@ -92,9 +95,9 @@ public class LibraryControl {
     }
 
     private void printOptions() {
-        printer.printLine("Wybierz opcje: ");
+        printer.printLine("Wybierz opcje: ".toUpperCase());
         for (Option option : Option.values()) {
-            printer.printLine(option.toString());
+            printer.printLine(option.toString().toUpperCase());
 
         }
     }
@@ -123,7 +126,7 @@ public class LibraryControl {
     }
 
     private void printBooks() {
-        Publication[] publications = library.getPublications();
+        Publication[] publications = getSortedPublications();
         printer.printBooks(publications);
     }
 
@@ -152,12 +155,18 @@ public class LibraryControl {
     }
 
     private void printMagazines() {
-        Publication[] publications = library.getPublications();
+        Publication[] publications = getSortedPublications();
         printer.printMagazine(publications);
     }
 
+    private Publication[] getSortedPublications() {
+        Publication[] publications = library.getPublications();
+        Arrays.sort(publications, new DateComparator());
+        return publications;
+    }
 
-        private void exit () {
+
+    private void exit () {
         try {
             fileManager.exportData(library);
             printer.printLine("Ekspot danych do pliku zakończona pomyhśnie");
