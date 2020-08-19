@@ -1,51 +1,50 @@
 package src.javastart.library.model;
 
+import src.javastart.library.exception.PublicationAlredyExistsException;
+import src.javastart.library.exception.UsersAlreadyExistsException;
+
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Library implements Serializable {
 
-    private static final int INITIAL_CAPACITY = 1;
-    private int publicationNumber = 0;
-    private Publication[] publications = new Publication[INITIAL_CAPACITY];
 
-    public Publication[] getPublications() {
-        Publication[] result = new Publication[publicationNumber];
-        for (int i = 0; i < publicationNumber; i++) {
-            result[i] = publications[i];
-        }
-        return result;
+    private Map<String, Publication> publications = new HashMap<>();
+    private Map<String, LibraryUser> users = new HashMap<>();
+
+    public Map<String, Publication> getPublications() {
+        return publications;
     }
 
+    public Map<String, LibraryUser> getUsers() {
+        return users;
+    }
 
     public void addPublication(Publication publication) {
-        if (publicationNumber == publications.length) {
-           publications = Arrays.copyOf(publications, publications.length * 2);
+        if (publications.containsKey(publication.getTitle())) {
+            throw new PublicationAlredyExistsException("Publikacja już istnieje" + publication.getTitle());
         }
-        publications[publicationNumber] = publication;
-        publicationNumber++;
+        publications.put(publication.getTitle(), publication);
     }
 
-
-    public boolean removePublication(Publication pub){
-        final int NOT_FOUND= -1;
-        int found = NOT_FOUND;
-        int i = 0;
-        while (i < publicationNumber && found == NOT_FOUND) {
-            if (pub.equals(publications[i])) {
-                found = i;
-            } else {
-                i++;
-            }
+    public void addUser(LibraryUser user) {
+        if (users.containsKey(user.getPesel())) {
+            throw new UsersAlreadyExistsException("Użytkownik już istnieje" + user.getPesel());
         }
+        users.put(user.getPesel(), user);
+    }
 
-        if (found != NOT_FOUND){
-            System.arraycopy(publications, found +1, publications, found, publications.length - found - 1);
-            publicationNumber--;
-            publications[publicationNumber] = null;
-            }
+    public boolean removePublication(Publication pub) {
+        if (publications.containsValue(pub)) {
+            publications.remove(pub.getTitle());
+            return true;
+        } else {
+            return false;
 
-            return found!= NOT_FOUND;
         }
     }
+}
 
