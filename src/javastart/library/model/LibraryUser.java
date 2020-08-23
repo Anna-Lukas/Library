@@ -14,9 +14,11 @@ public class LibraryUser extends User {
     }
 
     @Override
-    public String toCSV() {
+    public String toCsv() {
         return getFirstName()+"; " + getLstName()+"; "+ getPesel();
     }
+
+
 
     public List<Publication> getPublicationHistory() {
         return publicationHistory;
@@ -59,4 +61,6 @@ public class LibraryUser extends User {
     public int hashCode() {
         return Objects.hash(super.hashCode(), publicationHistory, borrowedPublication);
     }
+
+
 }
